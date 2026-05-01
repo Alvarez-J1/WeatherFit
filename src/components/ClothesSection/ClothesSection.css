@@ -1,5 +1,5 @@
 .clothes-section {
-  margin: 0;
+  margin-top: 50px;
 }
 
 .clothes-section__title {
@@ -29,10 +29,11 @@
   font-size: 20px;
   cursor: pointer;
   margin-top: -113px;
+  display: none;
 }
 
 .clothes-section__items {
-  width: 1015px;
+  width: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -41,4 +42,33 @@
   margin: 0;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
+}
+
+.clothes-section__title {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .clothes-section {
+    margin-top: 50px;
+  }
+  .clothes-section__add-btn {
+    display: none;
+  }
+
+  .clothes-section__title {
+    display: none;
+  }
+
+  .clothes-section__items {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    gap: 21px;
+    overflow-y: visible;
+    max-height: none;
+  }
 }

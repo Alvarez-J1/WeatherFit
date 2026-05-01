@@ -24,3 +24,18 @@
   font-weight: 700;
   font-size: 16px;
 }
+
+@media screen and (max-width: 800px) {
+  .modal__content--sp {
+    width: 300px;
+  }
+
+  .modal__input {
+    width: 261px;
+  }
+
+  .registerModal__switch {
+    bottom: 48px;
+    right: 58px;
+  }
+}

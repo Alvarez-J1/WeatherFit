@@ -26,9 +26,8 @@
 }
 
 .sidebar__profile-data {
-  display: flex;
-  flex-direction: column;
   gap: 8px; /* space between buttons */
+  display: flex;
 }
 
 .sidebar__edit-btn {
@@ -40,6 +39,7 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  background: none;
 }
 
 .sidebar__logout-btn {
@@ -50,7 +50,7 @@
   color: #000000;
   border: none;
   padding: 0;
-  margin-left: -101px;
+  margin-left: 0;
   cursor: pointer;
 }
 
@@ -66,4 +66,13 @@
   font-size: 18px;
   color: white;
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar__top {
+    display: none;
+  }
+  .sidebar__edit-btn {
+    margin-bottom: 15px;
+  }
 }

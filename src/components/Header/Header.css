@@ -10,6 +10,7 @@
 .header__user-container {
   display: flex;
   align-items: center;
+  margin-bottom: 0;
 }
 
 .header__logo {
@@ -60,6 +61,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  margin-left: 10px;
 }
 
 .header__avatar-placeholder {
@@ -92,4 +94,46 @@
   font-weight: 700;
   font-size: 20px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .header__logo {
+    width: 60px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .header__date-and-location {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header__signup-btn {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .header__signin-btn {
+    font-size: 16px;
+  }
+
+  .header__avatar {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  /* .header__user-container {
+    display: none;
+  } */
+
+  .header__add-clothes-btn {
+    /* margin-bottom: 10px; */
+  }
 }

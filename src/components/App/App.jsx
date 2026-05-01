@@ -36,7 +36,7 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -140,7 +140,7 @@ function App() {
     action
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((c) => (c._id === id ? updatedCard : c))
+          cards.map((c) => (c._id === id ? updatedCard : c)),
         );
       })
       .catch(console.error);
@@ -215,11 +215,15 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log("API Data:", data);
+        data.forEach((item) => {
+          const img = new Image();
+          img.src = item.imageUrl;
+        });
+
         setClothingItems(data);
       })
       .catch((err) => {
-        console.error("Failed to fetch weather data", err);
+        console.error("Failed to fetch clothing items", err);
       });
   }, []);
 

@@ -57,3 +57,19 @@
   padding: 0;
   cursor: pointer;
 }
+
+@media screen and (max-width: 800px) {
+  .modal__content_type_image {
+    height: 462px;
+    width: auto;
+  }
+
+  .modal__image {
+    width: 300px;
+    height: 365px;
+  }
+
+  .modal__delete-btn {
+    left: 167px;
+  }
+}
