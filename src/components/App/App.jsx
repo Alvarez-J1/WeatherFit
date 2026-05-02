@@ -215,11 +215,17 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        setClothingItems(data);
+        const imagePromises = data.map((item) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = item.imageUrl;
+            img.onload = resolve;
+            img.onerror = resolve;
+          });
+        });
 
-        data.forEach((item) => {
-          const img = new Image();
-          img.src = item.imageUrl;
+        Promise.all(imagePromises).then(() => {
+          setClothingItems(data);
         });
       })
       .catch((err) => {
