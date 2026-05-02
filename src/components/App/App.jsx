@@ -215,12 +215,18 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        data.forEach((item) => {
-          const img = new Image();
-          img.src = item.imageUrl;
+        const imagePromises = data.map((item) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = item.imageUrl;
+            img.onload = resolve;
+            img.onerror = resolve;
+          });
         });
 
-        setClothingItems(data);
+        Promise.all(imagePromises).then(() => {
+          setClothingItems(data);
+        });
       })
       .catch((err) => {
         console.error("Failed to fetch clothing items", err);

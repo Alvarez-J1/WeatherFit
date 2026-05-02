@@ -34,6 +34,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         className="card__image"
         src={item.imageUrl}
         alt={item.name}
+        loading="eager"
       />
       <div className="card__header">
         <h2 className="card__title">{item.name}</h2>
