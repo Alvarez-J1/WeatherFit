@@ -36,7 +36,7 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
-  const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -212,26 +212,15 @@ function App() {
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    getItems()
-      .then((data) => {
-        const imagePromises = data.map((item) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.src = item.imageUrl;
-            img.onload = resolve;
-            img.onerror = resolve;
-          });
-        });
-
-        Promise.all(imagePromises).then(() => {
-          setClothingItems(data);
-        });
-      })
-      .catch((err) => {
-        console.error("Failed to fetch clothing items", err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getItems()
+  //     .then((data) => {
+  //       setClothingItems(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Failed to fetch clothing items", err);
+  //     });
+  // }, []);
 
   useEffect(() => {
     setIsAuthChecking(true);
