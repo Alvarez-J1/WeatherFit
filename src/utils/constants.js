@@ -74,7 +74,7 @@ export const defaultClothingItems = [
     name: "Sunglasses",
     weather: "hot",
     imageUrl:
-      "https://target.scene7.com/is/image/Target/GUEST_4ad85e75-a710-42e9-b811-f76c9ff66c7c?wid=300&hei=300&fmt=pjpeg",
+      "https://www.quay.com/cdn/shop/files/Quay_HighKey_BlackFade_Front_3c2f5e85-e5b9-44f9-8c77-6e5cbfa00e62.jpg?v=1774299532",
   },
   {
     _id: 12,
