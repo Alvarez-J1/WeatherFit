@@ -1,8 +1,8 @@
-# WTWR (What To Wear Right Now) — Frontend
+# WeatherFit — Frontend
 
 ## Description
 
-WTWR is a weather-based clothing recommendation application.  
+WeatherFit is a weather-based clothing recommendation application.  
 It displays the user's current location, date, and temperature, and suggests appropriate clothing items based on current weather conditions.
 
 ## Technologies Used
