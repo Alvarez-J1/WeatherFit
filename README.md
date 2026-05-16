@@ -31,4 +31,4 @@ https://github.com/Alvarez-J1/se_project_express
 ## Status
 
 The frontend is complete.  
-Live demo: https://se-project-wtwr.onrender.com/
+Live demo: https://weatherfit-app.onrender.com/
