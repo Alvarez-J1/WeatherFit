@@ -1,33 +1,8 @@
 .sidebar {
   display: flex;
   gap: 16px;
-  flex-direction: column; /* stack avatar/name and buttons vertically */
+  flex-direction: column;
   align-items: flex-start;
-}
-
-.sidebar__top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.sidebar__username {
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 100%;
-}
-
-.sidebar__avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-}
-
-.sidebar__profile-data {
-  gap: 8px; /* space between buttons */
-  display: flex;
 }
 
 .sidebar__edit-btn {
@@ -52,27 +27,11 @@
   padding: 0;
   margin-left: 0;
   cursor: pointer;
-}
-
-.sidebar__avatar-placeholder {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
-  color: white;
-  text-transform: uppercase;
+  background: none;
 }
 
 @media screen and (max-width: 800px) {
-  .sidebar__top {
-    display: none;
-  }
-  .sidebar__edit-btn {
-    margin-bottom: 15px;
+  .sidebar {
+    width: 100%;
   }
 }

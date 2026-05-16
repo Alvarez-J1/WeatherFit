@@ -31,7 +31,7 @@
   }
 
   .modal__input {
-    width: 261px;
+    width: 100%;
   }
 
   .registerModal__switch {
