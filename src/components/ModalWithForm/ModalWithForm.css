@@ -25,10 +25,31 @@
   top: 22px;
   right: 28px;
   cursor: pointer;
-  background: transparent url(/src/assets/close-btn.png);
-  width: 16px;
-  height: 16px;
+  background: transparent;
+  width: 18px;
+  height: 18px;
   border: none;
+  padding: 0;
+}
+
+.modal__close::before,
+.modal__close::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: #000;
+}
+
+.modal__close::before {
+  transform: rotate(45deg);
+}
+
+.modal__close::after {
+  transform: rotate(-45deg);
 }
 
 .modal__title {

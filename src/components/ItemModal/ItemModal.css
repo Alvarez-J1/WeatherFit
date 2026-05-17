@@ -39,7 +39,7 @@
 }
 
 .modal__close_type_image {
-  background: url(/src/assets/close-btn-2.png);
+  background: transparent;
 }
 
 .modal__delete-btn {
