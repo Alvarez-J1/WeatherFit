@@ -5,36 +5,39 @@
 .clothes-section__header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  font-family: Cabinet Grotesk;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 100%;
 }
 
 .clothes-section__title {
   display: block;
   margin: 0;
+  color: var(--color-text);
+  font-size: 28px;
+  line-height: 32px;
 }
 
 .clothes-section__add-btn {
-  padding: 0;
+  padding: 10px 14px;
   border: none;
-  background: none;
-  color: rgba(0, 0, 0, 0.6);
+  border-radius: 999px;
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 20px;
   cursor: pointer;
-  display: none;
   white-space: nowrap;
 }
 
 .clothes-section__items {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 325px));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   justify-content: start;
-  gap: 20px;
+  gap: 22px;
   padding: 0;
   margin: 0;
   list-style-type: none;
@@ -47,17 +50,15 @@
     margin-top: 0;
   }
 
-  .clothes-section__add-btn {
-    display: none;
-  }
-
   .clothes-section__title {
     display: block;
+    font-size: 24px;
+    line-height: 28px;
   }
 
   .clothes-section__items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 325px));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     justify-content: center;
     width: 100%;
     margin: 0;
@@ -66,5 +67,21 @@
     gap: 21px;
     overflow-y: visible;
     max-height: none;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .clothes-section__header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .clothes-section__add-btn {
+    width: 100%;
+  }
+
+  .clothes-section__items {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

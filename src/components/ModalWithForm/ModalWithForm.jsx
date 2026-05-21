@@ -12,6 +12,8 @@ function ModalWithForm({
   submitClassName = "",
   variant,
   disabled,
+  description,
+  formFooter,
 }) {
   const variantAttr = variant ? `modal--${variant}` : "";
 
@@ -22,8 +24,16 @@ function ModalWithForm({
       } ${className} ${variantAttr}`}
     >
       <div className={`modal__content ${contentClassName}`}>
-        <h2 className="modal__title">{title}</h2>
-        <button onClick={onClose} type="button" className="modal__close" />
+        <div className="modal__header">
+          <h2 className="modal__title">{title}</h2>
+          {description && <p className="modal__description">{description}</p>}
+        </div>
+        <button
+          onClick={onClose}
+          type="button"
+          className="modal__close"
+          aria-label="Close modal"
+        />
         <form onSubmit={onSubmit} className="modal__form">
           {children}
           <button
@@ -33,6 +43,7 @@ function ModalWithForm({
           >
             {buttonText}
           </button>
+          {formFooter && <div className="modal__form-footer">{formFooter}</div>}
         </form>
       </div>
     </div>

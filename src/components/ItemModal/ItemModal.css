@@ -3,10 +3,12 @@
   width: 498px;
   height: 498px;
   border-radius: 16px;
+  background: var(--color-surface-muted);
+  object-fit: cover;
 }
 
 .modal__content {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--color-surface-strong);
   position: relative;
   height: 436px;
   border-radius: 20px;
@@ -14,6 +16,12 @@
   max-width: 496px;
   box-sizing: border-box;
   width: 100%;
+  color: var(--color-text);
+  box-shadow: var(--shadow-panel);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .modal__content_type_image {
@@ -24,18 +32,18 @@
 
 .modal__caption {
   margin: 20px 32px 12px;
-  font-family: Cabinet Grotesk;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  color: var(--color-text);
 }
 
 .modal__weather {
   margin: 12px 32px 32px;
-  font-family: Cabinet Grotesk;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  color: var(--color-text-muted);
 }
 
 .modal__close_type_image {
@@ -49,8 +57,7 @@
   left: 360px;
   background: none;
   border: none;
-  color: rgba(255, 77, 0, 1);
-  font-family: Cabinet Grotesk;
+  color: var(--color-danger);
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;

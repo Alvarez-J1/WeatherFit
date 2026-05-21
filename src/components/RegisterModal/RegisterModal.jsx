@@ -20,7 +20,7 @@ export default function RegisterModal({
     if (isOpen) {
       setValues({ email: "", password: "", name: "", avatar: "" });
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,34 +29,53 @@ export default function RegisterModal({
 
   return (
     <ModalWithForm
-      title="Sign Up"
+      title="Create your WeatherFit"
+      description="Create a profile so WeatherFit can personalize your outfit recommendations."
       buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      contentClassName="modal__content--sp"
-      submitClassName="modal__submit--signup"
+      variant="auth"
+      contentClassName="modal__content--auth modal__content--sp"
+      submitClassName="modal__submit--auth modal__submit--signup"
       disabled={
         !values.email || !values.password || !values.name || !values.avatar
       }
+      formFooter={
+        <p className="auth-modal__switch-text">
+          Already have an account?
+          <button
+            type="button"
+            onClick={onOpenLogin}
+            className="auth-modal__switch"
+          >
+            Log in
+          </button>
+        </p>
+      }
     >
       <label htmlFor="email" className="modal__label">
-        Email<span className="modal__required">*</span>
+        <span className="modal__label-text">
+          Email<span className="modal__required">*</span>
+        </span>
         <input
           type="email"
           className="modal__input"
           id="email"
           name="email"
-          placeholder="Email"
+          placeholder="you@example.com"
           required
           minLength="1"
           maxLength="999"
           onChange={handleChange}
           value={values.email}
+          autoComplete="email"
         />
       </label>
       <label htmlFor="registerModal__password" className="modal__label">
-        Password<span className="modal__required">*</span>
+        <span className="modal__label-text">
+          Password<span className="modal__required">*</span>
+        </span>
         <input
           type="password"
           className="modal__input"
@@ -68,45 +87,48 @@ export default function RegisterModal({
           maxLength="999"
           onChange={handleChange}
           value={values.password}
+          autoComplete="new-password"
         />
       </label>
       <label htmlFor="registerModal__name" className="modal__label">
-        Name<span className="modal__required">*</span>
+        <span className="modal__label-text">
+          Name<span className="modal__required">*</span>
+        </span>
         <input
           type="text"
           className="modal__input"
           id="registerModal__name"
           name="name"
-          placeholder="Name"
+          placeholder="Your name"
           required
           minLength="1"
           maxLength="999"
           onChange={handleChange}
           value={values.name}
+          autoComplete="name"
         />
       </label>
       <label htmlFor="registerModal__avatar" className="modal__label">
-        Avatar URL<span className="modal__required">*</span>
+        <span className="modal__label-text">
+          Profile image link<span className="modal__required">*</span>
+        </span>
         <input
-          type="text"
+          type="url"
           className="modal__input"
           id="registerModal__avatar"
           name="avatar"
-          placeholder="Avatar Url"
+          placeholder="https://example.com/photo.jpg"
           required
           minLength="1"
           maxLength="999"
           onChange={handleChange}
           value={values.avatar}
+          autoComplete="url"
         />
+        <span className="modal__field-hint">
+          Paste a direct image URL for your profile photo.
+        </span>
       </label>
-      <button
-        type="button"
-        onClick={onOpenLogin}
-        className="registerModal__switch"
-      >
-        or Log In
-      </button>
     </ModalWithForm>
   );
 }

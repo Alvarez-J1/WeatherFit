@@ -23,7 +23,7 @@ export default function LoginModal({
       setLoginError("");
       setWrongField("");
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,18 +49,32 @@ export default function LoginModal({
 
   return (
     <ModalWithForm
-      title="Log In"
+      title="Welcome back"
+      description="Log in to save outfits, add clothing, and keep your WeatherFit profile synced."
       buttonText="Log In"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       type="submit"
-      contentClassName="modal__content--si"
-      submitClassName="modal__submit--si"
+      variant="auth"
+      contentClassName="modal__content--auth modal__content--si"
+      submitClassName="modal__submit--auth modal__submit--si"
       disabled={!values.email || !values.password}
+      formFooter={
+        <p className="auth-modal__switch-text">
+          New to WeatherFit?
+          <button
+            type="button"
+            className="auth-modal__switch"
+            onClick={onOpenRegister}
+          >
+            Create an account
+          </button>
+        </p>
+      }
     >
       <label htmlFor="loginModal__email" className="modal__label">
-        Email
+        <span className="modal__label-text">Email</span>
         <input
           type="email"
           className={`modal__input ${
@@ -68,12 +82,14 @@ export default function LoginModal({
           }`}
           id="loginModal__email"
           name="email"
-          placeholder="Email"
+          placeholder="you@example.com"
           required
           minLength="1"
           maxLength="999"
           onChange={handleChange}
           value={values.email}
+          autoComplete="email"
+          aria-invalid={wrongField === "email"}
         />
       </label>
       <label
@@ -82,10 +98,11 @@ export default function LoginModal({
           wrongField === "password" ? "modal__label--error" : ""
         }`}
       >
-        {wrongField === "password" ? "Incorrect password" : "Password"}
+        <span className="modal__label-text">
+          {wrongField === "password" ? "Password needs attention" : "Password"}
+        </span>
       </label>
 
-      {/* Password input */}
       <input
         type="password"
         className={`modal__input ${
@@ -99,16 +116,16 @@ export default function LoginModal({
         maxLength="999"
         onChange={handleChange}
         value={values.password}
+        autoComplete="current-password"
+        aria-invalid={wrongField === "password"}
+        aria-describedby={loginError ? "loginModal__error" : undefined}
       />
 
-      {loginError && <span className="modal__error">{loginError}</span>}
-      <button
-        type="button"
-        className="loginModal__switch"
-        onClick={onOpenRegister}
-      >
-        or Sign Up
-      </button>
+      {loginError && (
+        <span className="modal__error" id="loginModal__error">
+          {loginError}
+        </span>
+      )}
     </ModalWithForm>
   );
 }

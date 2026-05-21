@@ -21,7 +21,7 @@ export default function AddItemModal({
         weather: "",
       });
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +35,9 @@ export default function AddItemModal({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      variant="add-item"
+      contentClassName="modal__content--add-item"
+      submitClassName="modal__submit--add-item"
     >
       <label htmlFor="addItemModal__name" className="modal__label">
         Name

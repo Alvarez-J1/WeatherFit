@@ -1,9 +1,32 @@
 .modal__content--sm {
   width: 496px;
-  height: 304px;
+  height: auto;
 }
 
 .modal__submit--dark {
-  background-color: #000000;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
   margin-top: 32px;
+}
+
+.modal--edit-profile .modal__content--sm {
+  max-height: calc(100vh - 48px);
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.modal--edit-profile .modal__input {
+  width: 100%;
+}
+
+.modal--edit-profile .modal__submit--dark {
+  width: auto;
+  min-width: 154px;
+  padding: 0 22px;
+}
+
+@media screen and (max-width: 560px) {
+  .modal--edit-profile .modal__content--sm {
+    width: 100%;
+  }
 }

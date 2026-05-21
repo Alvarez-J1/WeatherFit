@@ -40,10 +40,10 @@ provides endpoints to add/remove clothing items
   
 ## Screenshots
 ## Desktop View
-<img width="1901" height="914" alt="image" src="https://github.com/user-attachments/assets/16eff13f-31e7-44b1-9c26-c14148d1acad" />
+<img width="1903" height="913" alt="image" src="https://github.com/user-attachments/assets/cd6355b8-8ab1-4349-aaa1-90cd028a8dcf" />
 
 ## Mobile View
-<img width="420" height="770" alt="image" src="https://github.com/user-attachments/assets/c6c99552-8b0d-42e1-aa1d-7904b7eb3ae2" />
+<img width="475" height="763" alt="image" src="https://github.com/user-attachments/assets/edc855f6-9683-4cfb-9dda-1fdf21c9b221" />
 
 ## Backend
 

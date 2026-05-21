@@ -1,37 +1,53 @@
 .sidebar {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface-glass);
+  box-shadow: var(--shadow-card);
+}
+
+.sidebar__edit-btn,
+.sidebar__logout-btn {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: left;
 }
 
 .sidebar__edit-btn {
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 100%;
-  color: #000000;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  background: none;
+  color: var(--button-secondary-text);
+  background: var(--button-secondary-bg);
 }
 
 .sidebar__logout-btn {
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 100%;
-  color: #000000;
-  border: none;
-  padding: 0;
-  margin-left: 0;
-  cursor: pointer;
-  background: none;
+  color: var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 12%, var(--color-surface));
+}
+
+.sidebar__edit-btn:hover,
+.sidebar__logout-btn:hover {
+  transform: translateY(-1px);
 }
 
 @media screen and (max-width: 800px) {
   .sidebar {
     width: 100%;
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .sidebar {
+    flex-direction: column;
   }
 }

@@ -22,13 +22,35 @@ import {
   coordinates,
   defaultClothingItems,
 } from "../../utils/constants";
-import { getItems, deleteItem } from "../../utils/api";
+import { deleteItem } from "../../utils/api";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/api";
 
 // Contexts
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+
+const getStoredTheme = () => {
+  const savedTheme = localStorage.getItem("weatherfit-theme");
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme;
+  }
+
+  return null;
+};
+
+const getPreferredTheme = () => {
+  const storedTheme = getStoredTheme();
+
+  if (storedTheme) {
+    return storedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -40,6 +62,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [theme, setTheme] = useState(getPreferredTheme);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [currentUser, setCurrentUser] = useState({
@@ -159,6 +182,14 @@ function App() {
     } else setCurrentTemperatureUnit("F");
   };
 
+  const handleToggleTheme = () => {
+    setTheme((currentTheme) => {
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      localStorage.setItem("weatherfit-theme", nextTheme);
+      return nextTheme;
+    });
+  };
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -212,6 +243,49 @@ function App() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
+  useEffect(() => {
+    if (!activeModal) return undefined;
+
+    const bodyOverflow = document.body.style.overflow;
+    const htmlOverflow = document.documentElement.style.overflow;
+    const bodyPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
+    return () => {
+      document.body.style.overflow = bodyOverflow;
+      document.documentElement.style.overflow = htmlOverflow;
+      document.body.style.paddingRight = bodyPaddingRight;
+    };
+  }, [activeModal]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleSystemThemeChange = (event) => {
+      if (!getStoredTheme()) {
+        setTheme(event.matches ? "dark" : "light");
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+    };
+  }, []);
+
   // useEffect(() => {
   //   getItems()
   //     .then((data) => {
@@ -249,12 +323,14 @@ function App() {
       .finally(() => setIsAuthChecking(false));
   }, []);
 
+  const pageWeatherClass = `page page_weather_${weatherData.type || "default"}`;
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <div className="page">
+        <div className={pageWeatherClass}>
           <div className="page__content">
             <Header
               handleAddClick={handleAddClick}
@@ -262,6 +338,8 @@ function App() {
               isLoggedIn={isLoggedIn}
               onLoginClick={openLoginModal}
               onRegisterClick={openRegisterModal}
+              theme={theme}
+              onToggleTheme={handleToggleTheme}
             />
             <Routes>
               <Route
@@ -282,7 +360,7 @@ function App() {
                     isLoggedIn={isLoggedIn}
                     isAuthChecking={isAuthChecking}
                     fallback={
-                      <div className="app__loader">Checking session…</div>
+                      <div className="app__loader">Checking session...</div>
                     }
                   >
                     <Profile

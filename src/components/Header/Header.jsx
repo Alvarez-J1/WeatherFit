@@ -1,7 +1,6 @@
 import "./Header.css";
-import headerLogo from "../../assets/logo.svg";
-// import avatarLogo from "../../assets/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -12,6 +11,8 @@ function Header({
   isLoggedIn,
   onLoginClick,
   onRegisterClick,
+  theme,
+  onToggleTheme,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const name = currentUser?.name || "";
@@ -24,14 +25,19 @@ function Header({
   });
   return (
     <header className="header">
-      <Link to="/">
-        <img src={headerLogo} alt="User avatar" className="header__logo"></img>
+      <Link to="/" className="header__brand-link">
+        <span className="header__brand-mark" aria-hidden="true">
+          <span className="header__brand-cloud"></span>
+          <span className="header__brand-sun"></span>
+        </span>
+        <span className="header__brand-name">WeatherFit</span>
       </Link>
 
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
+      <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
       {isLoggedIn ? (
         // Authorized view
         <>
@@ -60,7 +66,7 @@ function Header({
         </>
       ) : (
         // Non-authorized view
-        <div>
+        <div className="header__auth-actions">
           <button className="header__signup-btn" onClick={onRegisterClick}>
             Sign Up
           </button>
