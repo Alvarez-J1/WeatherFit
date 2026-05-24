@@ -1,87 +1,88 @@
+import beanieImage from "../assets/clothing/beanie.jpg";
+import winterJacketImage from "../assets/clothing/winter-jacket.jpg";
+import sweaterImage from "../assets/clothing/sweater.jpg";
+import sweatpantsImage from "../assets/clothing/sweatpants.jpg";
+import scarfImage from "../assets/clothing/scarf.jpg";
+import glovesImage from "../assets/clothing/gloves.jpg";
+import tshirtImage from "../assets/clothing/t-shirt.jpg";
+import tankTopImage from "../assets/clothing/tank-top.jpg";
+import shortsImage from "../assets/clothing/shorts.jpg";
+import capImage from "../assets/clothing/cap.jpg";
+import sunglassesImage from "../assets/clothing/sunglasses.jpg";
+import sneakersImage from "../assets/clothing/sneakers.jpg";
+
 export const defaultClothingItems = [
   {
     _id: 1,
     name: "Beanie",
     weather: "cold",
-    imageUrl:
-      "https://wiesmade.com/cdn/shop/files/Beanie_Pomegranate_1_100_wool_made_in_usa.jpg?v=1726535890",
+    imageUrl: beanieImage,
   },
   {
     _id: 2,
     name: "Winter Jacket",
     weather: "cold",
-    imageUrl:
-      "https://www.backpacker.com/wp-content/uploads/2021/10/mountainequipment-scaled.jpg?width=730",
+    imageUrl: winterJacketImage,
   },
   {
     _id: 3,
     name: "Sweater",
     weather: "cold",
-    imageUrl:
-      "https://static2.goldengoose.com/public/Style/ECOMM/GMP00841.P000662-60304.jpg",
+    imageUrl: sweaterImage,
   },
   {
     _id: 4,
     name: "Sweatpants",
     weather: "cold",
-    imageUrl:
-      "https://imgs.search.brave.com/uDDPisiVsPo4x80hBbKhx00c6OzjZfw5TX94MmnxJtE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzUxOUVHcVRhZi1M/LmpwZw",
+    imageUrl: sweatpantsImage,
   },
   {
     _id: 5,
     name: "Scarf",
     weather: "cold",
-    imageUrl:
-      "https://target.scene7.com/is/image/Target/GUEST_4ad85e75-a710-42e9-b811-f76c9ff66c7c?wid=300&hei=300&fmt=pjpeg",
+    imageUrl: scarfImage,
   },
   {
     _id: 6,
     name: "Gloves",
     weather: "cold",
-    imageUrl:
-      "https://assets.adidas.com/images/w_600,f_auto,q_auto/ac7ce5a348e34913bead2416dfa5546c_9366/AWP_MAIN_-_Cold_Weather_Gloves_Black_JJ9472_01_00_standard.jpg",
+    imageUrl: glovesImage,
   },
   {
     _id: 7,
     name: "T-shirt",
     weather: "hot",
-    imageUrl:
-      "https://www.fairindigo.com/cdn/shop/files/CL_04891_White_SS24_7526.jpg?v=1772568336&width=1946",
+    imageUrl: tshirtImage,
   },
   {
     _id: 8,
     name: "Tank Top",
     weather: "hot",
-    imageUrl:
-      "https://www.tuffwraps.com/cdn/shop/files/tuff-basic-tank-tuffwraps-1177337993.png?v=1752164194&width=2800",
+    imageUrl: tankTopImage,
   },
   {
     _id: 9,
     name: "Shorts",
     weather: "hot",
-    imageUrl:
-      "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/461686s.jpg?im=Resize,width=750",
+    imageUrl: shortsImage,
   },
   {
     _id: 10,
     name: "Cap",
     weather: "hot",
-    imageUrl:
-      "https://liftdown.com/cdn/shop/files/lift-down-breeze-cap-jet-black-784550.png?v=1766698606",
+    imageUrl: capImage,
   },
   {
     _id: 11,
     name: "Sunglasses",
     weather: "hot",
-    imageUrl:
-      "https://www.quay.com/cdn/shop/files/Quay_HighKey_BlackFade_Front_3c2f5e85-e5b9-44f9-8c77-6e5cbfa00e62.jpg?v=1774299532",
+    imageUrl: sunglassesImage,
   },
   {
     _id: 12,
     name: "Sneakers",
     weather: "hot",
-    imageUrl:
-      "https://cdn.shopify.com/s/files/1/0204/2258/products/White_Stairs_2.jpg?v=1569299996",
+    imageUrl: sneakersImage,
   },
 ];
 

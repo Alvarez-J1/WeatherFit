@@ -1,6 +1,7 @@
 .card {
   position: relative;
   min-width: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -16,52 +17,136 @@
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  border-color: var(--color-border-strong);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+}
+
+.card__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: var(--color-surface-muted);
+  cursor: pointer;
+}
+
+.card__media:focus-visible,
+.card__like:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .card__image {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  height: auto;
+  height: 100%;
   margin: 0;
-  background: var(--color-surface-muted);
-  cursor: pointer;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.28s ease;
 }
 
 .card:hover .card__image {
-  transform: scale(1.025);
+  transform: scale(1.03);
 }
 
-.card__header {
+.card__body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  min-height: 58px;
-  padding: 14px 14px 14px 16px;
+  min-height: 104px;
+  padding: 14px 14px 15px 16px;
   border-top: 1px solid var(--color-border);
+  background: var(--color-surface-strong);
+}
+
+.card__details {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.card__category {
+  max-width: 100%;
+  margin: 0;
+  overflow: hidden;
+  color: var(--color-text-subtle);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .card__title {
   min-width: 0;
+  max-width: 100%;
   margin: 0;
   overflow: hidden;
   color: var(--color-text);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.card__weather {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 26px;
+  margin-top: 3px;
+  padding: 5px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.card__weather_type_hot {
+  color: #9a3412;
+  background: color-mix(in srgb, #f97316 12%, var(--color-surface-strong));
+}
+
+.card__weather_type_warm {
+  color: #854d0e;
+  background: color-mix(in srgb, #eab308 13%, var(--color-surface-strong));
+}
+
+.card__weather_type_cold {
+  color: var(--color-accent-strong);
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 10%,
+    var(--color-surface-strong)
+  );
+}
+
+[data-theme="dark"] .card__weather_type_hot {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .card__weather_type_warm {
+  color: #fde68a;
+}
+
 .card__like {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -72,6 +157,10 @@
   background: var(--color-surface-strong);
   cursor: pointer;
   box-shadow: var(--shadow-subtle);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .card__like:hover {
@@ -92,13 +181,19 @@
 }
 
 .like__btn-spacer {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   flex: 0 0 auto;
 }
 
 @media screen and (max-width: 560px) {
-  .card__header {
-    min-height: 56px;
+  .card__body {
+    min-height: 96px;
+    padding: 13px;
+  }
+
+  .card__title {
+    font-size: 16px;
+    line-height: 20px;
   }
 }

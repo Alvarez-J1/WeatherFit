@@ -1,8 +1,8 @@
 .profile {
   display: flex;
   align-items: flex-start;
-  gap: 40px;
-  padding-top: 24px;
+  gap: 32px;
+  padding-top: 6px;
   animation: weatherfit-fade-up 0.55s ease both;
 }
 
@@ -19,8 +19,8 @@
 @media screen and (max-width: 800px) {
   .profile {
     flex-direction: column;
-    gap: 24px;
-    padding-top: 12px;
+    gap: 20px;
+    padding-top: 4px;
   }
 
   .profile__sidebar {

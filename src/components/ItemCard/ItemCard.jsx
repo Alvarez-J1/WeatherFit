@@ -4,14 +4,49 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import likeButton from "../../assets/Default.svg";
 import likedHeart from "../../assets/heart.svg";
 
+const weatherLabels = {
+  hot: "Hot weather",
+  warm: "Mild weather",
+  cold: "Cold weather",
+};
+
+const inferCategory = (name = "") => {
+  const normalizedName = name.toLowerCase();
+
+  if (/jacket|coat|hoodie|parka|windbreaker/.test(normalizedName)) {
+    return "Outerwear";
+  }
+
+  if (/sweater|shirt|t-shirt|tee|tank|top/.test(normalizedName)) {
+    return "Tops";
+  }
+
+  if (/shorts|pants|sweatpants|jeans|trousers/.test(normalizedName)) {
+    return "Bottoms";
+  }
+
+  if (/sneaker|shoe|boot|footwear/.test(normalizedName)) {
+    return "Footwear";
+  }
+
+  if (/beanie|cap|hat|scarf|glove|sunglasses/.test(normalizedName)) {
+    return "Accessories";
+  }
+
+  return "Wardrobe item";
+};
+
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
   const isAuthorized = !!currentUser?._id;
-
   const likes = Array.isArray(item.likes) ? item.likes : [];
-
   const isLiked = isAuthorized && likes.some((id) => id === currentUser._id);
+  const weatherType = ["hot", "warm", "cold"].includes(item.weather)
+    ? item.weather
+    : "default";
+  const weatherLabel = weatherLabels[weatherType] || "Weather ready";
+  const category = item.category || inferCategory(item.name);
 
   const itemLikeButtonClassName = `card__like ${
     isLiked ? "card__like--active" : ""
@@ -22,32 +57,45 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   };
 
   const handleLike = (e) => {
-    e.stopPropagation(); //  Makes sure clicking the ♥ button only likes and doesn’t also trigger other clicks.
-    if (!isAuthorized) return; //  Adds a safety net so only logged-in users can run the like action, even if the button somehow appears for others.
+    e.stopPropagation();
+    if (!isAuthorized) return;
     onCardLike(item);
   };
 
   return (
     <li className="card">
-      <img
+      <button
         onClick={handleCardClick}
-        className="card__image"
-        src={item.imageUrl}
-        alt={item.name}
-        loading="eager"
-      />
-      <div className="card__header">
-        <h2 className="card__title">{item.name}</h2>
-
+        className="card__media"
+        type="button"
+        aria-label={`View ${item.name}`}
+      >
+        <img
+          className="card__image"
+          src={item.imageUrl}
+          alt={item.name}
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <div className="card__body">
+        <div className="card__details">
+          <p className="card__category">{category}</p>
+          <h2 className="card__title">{item.name}</h2>
+          <span className={`card__weather card__weather_type_${weatherType}`}>
+            {weatherLabel}
+          </span>
+        </div>
         {isAuthorized ? (
           <button
             type="button"
             className={itemLikeButtonClassName}
             onClick={handleLike}
+            aria-label={isLiked ? `Unlike ${item.name}` : `Like ${item.name}`}
           >
             <img
               src={isLiked ? likedHeart : likeButton}
-              alt="like-btn"
+              alt=""
               className="like__btn"
             />
           </button>
