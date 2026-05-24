@@ -4,12 +4,6 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import likeButton from "../../assets/Default.svg";
 import likedHeart from "../../assets/heart.svg";
 
-const weatherLabels = {
-  hot: "Hot weather",
-  warm: "Mild weather",
-  cold: "Cold weather",
-};
-
 const inferCategory = (name = "") => {
   const normalizedName = name.toLowerCase();
 
@@ -42,10 +36,6 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   const isAuthorized = !!currentUser?._id;
   const likes = Array.isArray(item.likes) ? item.likes : [];
   const isLiked = isAuthorized && likes.some((id) => id === currentUser._id);
-  const weatherType = ["hot", "warm", "cold"].includes(item.weather)
-    ? item.weather
-    : "default";
-  const weatherLabel = weatherLabels[weatherType] || "Weather ready";
   const category = item.category || inferCategory(item.name);
 
   const itemLikeButtonClassName = `card__like ${
@@ -82,9 +72,6 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         <div className="card__details">
           <p className="card__category">{category}</p>
           <h2 className="card__title">{item.name}</h2>
-          <span className={`card__weather card__weather_type_${weatherType}`}>
-            {weatherLabel}
-          </span>
         </div>
         {isAuthorized ? (
           <button

@@ -59,7 +59,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  min-height: 104px;
+  min-height: 88px;
   padding: 14px 14px 15px 16px;
   border-top: 1px solid var(--color-border);
   background: var(--color-surface-strong);
@@ -98,50 +98,6 @@
   line-height: 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.card__weather {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  min-height: 26px;
-  margin-top: 3px;
-  padding: 5px 8px;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-surface-muted);
-  color: var(--color-text-muted);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 14px;
-  white-space: nowrap;
-}
-
-.card__weather_type_hot {
-  color: #9a3412;
-  background: color-mix(in srgb, #f97316 12%, var(--color-surface-strong));
-}
-
-.card__weather_type_warm {
-  color: #854d0e;
-  background: color-mix(in srgb, #eab308 13%, var(--color-surface-strong));
-}
-
-.card__weather_type_cold {
-  color: var(--color-accent-strong);
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 10%,
-    var(--color-surface-strong)
-  );
-}
-
-[data-theme="dark"] .card__weather_type_hot {
-  color: #fdba74;
-}
-
-[data-theme="dark"] .card__weather_type_warm {
-  color: #fde68a;
 }
 
 .card__like {
@@ -188,7 +144,7 @@
 
 @media screen and (max-width: 560px) {
   .card__body {
-    min-height: 96px;
+    min-height: 84px;
     padding: 13px;
   }
 
