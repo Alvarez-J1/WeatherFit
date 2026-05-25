@@ -52,6 +52,27 @@ const getPreferredTheme = () => {
     : "light";
 };
 
+const isApiItemId = (id) => /^[a-f\d]{24}$/i.test(String(id));
+
+const normalizeId = (id) => String(id);
+
+const isItemLikedByUser = (item, userId) => {
+  const likes = Array.isArray(item.likes) ? item.likes : [];
+  return likes.some((id) => normalizeId(id) === userId);
+};
+
+const toggleItemLike = (item, userId) => {
+  const likes = Array.isArray(item.likes) ? item.likes : [];
+  const isLiked = isItemLikedByUser(item, userId);
+
+  return {
+    ...item,
+    likes: isLiked
+      ? likes.filter((id) => normalizeId(id) !== userId)
+      : [...likes, userId],
+  };
+};
+
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -154,8 +175,24 @@ function App() {
 
   const handleCardLike = (item) => {
     const token = localStorage.getItem("jwt");
+    const userId = currentUser?._id;
     const id = item._id;
-    const isLiked = item.likes?.some((uid) => uid === currentUser._id);
+
+    if (!token || !userId) return;
+
+    const isLiked = isItemLikedByUser(item, userId);
+
+    if (!isApiItemId(id)) {
+      setClothingItems((cards) =>
+        cards.map((card) =>
+          normalizeId(card._id) === normalizeId(id)
+            ? toggleItemLike(card, userId)
+            : card,
+        ),
+      );
+      return;
+    }
+
     const action = isLiked
       ? api.removeCardLike(id, token)
       : api.addCardLike(id, token);
@@ -163,7 +200,9 @@ function App() {
     action
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((c) => (c._id === id ? updatedCard : c)),
+          cards.map((card) =>
+            normalizeId(card._id) === normalizeId(id) ? updatedCard : card,
+          ),
         );
       })
       .catch(console.error);

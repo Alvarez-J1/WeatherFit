@@ -5,6 +5,8 @@ import "./Main.css";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
+const RECOMMENDATION_LIMIT = 6;
+
 function Main({ weatherData, onCardClick, onCardLike, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temperature =
@@ -18,7 +20,7 @@ function Main({ weatherData, onCardClick, onCardLike, clothingItems }) {
         : "weather-ready";
   const filteredClothingItems = clothingItems.filter((item) => {
     return item.weather === weatherData.type;
-  });
+  }).slice(0, RECOMMENDATION_LIMIT);
 
   return (
     <main className="main">
