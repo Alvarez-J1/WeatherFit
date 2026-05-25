@@ -4,11 +4,25 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const emptyWardrobePreviews = [
-  { label: "Outerwear", type: "outerwear" },
-  { label: "Sweaters", type: "sweaters" },
-  { label: "Accessories", type: "accessories" },
-  { label: "Footwear", type: "footwear" },
+  { label: "Outerwear" },
+  { label: "Sweaters" },
+  { label: "Accessories" },
+  { label: "Footwear" },
 ];
+
+function WardrobePreviewIcon() {
+  return (
+    <svg
+      className="clothes-section__empty-preview-icon"
+      viewBox="0 0 64 64"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M32 15a5 5 0 0 1 4 8l-4 3" />
+      <path d="M32 26 15 41a4 4 0 0 0 3 7h28a4 4 0 0 0 3-7L32 26Z" />
+    </svg>
+  );
+}
 
 function ClothesSection({
   onCardClick,
@@ -52,15 +66,15 @@ function ClothesSection({
           aria-labelledby="wardrobeEmptyTitle"
         >
           <div className="clothes-section__empty-content">
-            <div
+            <svg
               className="clothes-section__empty-illustration"
+              viewBox="0 0 64 64"
+              fill="none"
               aria-hidden="true"
             >
-              <div className="clothes-section__empty-rail"></div>
-              <div className="clothes-section__empty-hanger"></div>
-              <div className="clothes-section__empty-garment clothes-section__empty-garment_type_jacket"></div>
-              <div className="clothes-section__empty-garment clothes-section__empty-garment_type_shirt"></div>
-            </div>
+              <path d="M32 15a5 5 0 0 1 4 8l-4 3" />
+              <path d="M32 26 15 41a4 4 0 0 0 3 7h28a4 4 0 0 0 3-7L32 26Z" />
+            </svg>
             <p className="clothes-section__empty-eyebrow">Your wardrobe</p>
             <h2
               className="clothes-section__empty-title"
@@ -72,23 +86,23 @@ function ClothesSection({
               Add clothing items to personalize your daily outfit
               recommendations and weather-based suggestions.
             </p>
-            <button
+            {/* <button
               onClick={handleAddClick}
               type="button"
               className="clothes-section__empty-add-btn"
             >
               + Add new
-            </button>
+            </button> */}
           </div>
 
           <ul className="clothes-section__empty-previews" aria-hidden="true">
             {emptyWardrobePreviews.map((preview) => (
               <li
-                className={`clothes-section__empty-preview clothes-section__empty-preview_type_${preview.type}`}
+                className="clothes-section__empty-preview"
                 key={preview.label}
               >
                 <div className="clothes-section__empty-preview-image">
-                  <span className="clothes-section__empty-preview-icon"></span>
+                  <WardrobePreviewIcon />
                 </div>
                 <div className="clothes-section__empty-preview-footer">
                   <span className="clothes-section__empty-preview-name">
