@@ -43,7 +43,8 @@ provides endpoints to add/remove clothing items
 <img width="1903" height="913" alt="image" src="https://github.com/user-attachments/assets/cd6355b8-8ab1-4349-aaa1-90cd028a8dcf" />
 
 ## Mobile View
-<img width="475" height="763" alt="image" src="https://github.com/user-attachments/assets/edc855f6-9683-4cfb-9dda-1fdf21c9b221" />
+<img width="433" height="765" alt="image" src="https://github.com/user-attachments/assets/20217147-b704-419d-be55-1f6b0878314b" />
+
 
 ## Backend
 
