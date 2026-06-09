@@ -1,7 +1,8 @@
-# WeatherFit 
-
+# WeatherFit
 WeatherFit is a weather-based clothing recommendation application.  
 It displays the user's current location, date, and temperature, and suggests appropriate clothing items based on current weather conditions.
+
+<img width="1903" height="913" alt="image" src="https://github.com/user-attachments/assets/cd6355b8-8ab1-4349-aaa1-90cd028a8dcf" />
 
 ## Live Demo
 
