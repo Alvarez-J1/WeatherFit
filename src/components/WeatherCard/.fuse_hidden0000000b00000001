@@ -22,9 +22,9 @@ function WeatherCard({
         : "Loading forecast";
   const outfitHint =
     weatherType === "hot"
-      ? "Perfect weather for a T-shirt and shorts."
+      ? "Built for breathable layers, shade, and easy movement."
       : weatherType === "cold"
-        ? "A warm jacket and layers are recommended today."
+        ? "Built for warm layers, coverage, and comfort."
         : "WeatherFit is checking your best outfit match.";
 
   const locationLabel =

@@ -2,45 +2,44 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 
 import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
-import { useContext } from "react";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 const RECOMMENDATION_LIMIT = 6;
 
-function Main({ weatherData, onCardClick, onCardLike, clothingItems }) {
-  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temperature =
-    currentTemperatureUnit === "F" ? weatherData.temp.F : weatherData.temp.C;
+function Main({
+  weatherData,
+  onCardClick,
+  onCardLike,
+  clothingItems,
+  isWeatherLoading,
+  weatherError,
+  locationStatus,
+  onUseMyLocation,
+}) {
   const weatherType = weatherData.type || "default";
-  const weatherLabel =
-    weatherType === "hot"
-      ? "hot-weather"
-      : weatherType === "cold"
-        ? "cold-weather"
-        : "weather-ready";
-  const filteredClothingItems = clothingItems.filter((item) => {
-    return item.weather === weatherData.type;
-  }).slice(0, RECOMMENDATION_LIMIT);
+  const filteredClothingItems = clothingItems
+    .filter((item) => {
+      return item.weather === weatherData.type;
+    })
+    .slice(0, RECOMMENDATION_LIMIT);
 
   return (
     <main className="main">
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard
+        weatherData={weatherData}
+        isWeatherLoading={isWeatherLoading}
+        weatherError={weatherError}
+        locationStatus={locationStatus}
+        onUseMyLocation={onUseMyLocation}
+      />
       <section className={`cards cards_weather_${weatherType}`}>
         <div className="cards__header">
           <div className="cards__heading-group">
             <p className="cards__eyebrow">Outfit recommendations</p>
             <h2 className="cards__title">Your WeatherFit for today</h2>
           </div>
-          <p className="cards__summary">
-            <span>
-              {temperature}&deg; {currentTemperatureUnit}
-            </span>
-            <span>{weatherData.city || "Local forecast"}</span>
-            <span>{weatherLabel}</span>
-          </p>
         </div>
         <p className="cards__text">
-        These pieces are selected to match today’s weather conditions
+          These pieces are selected to match today&rsquo;s weather conditions
         </p>
         <ul className="cards__list">
           {filteredClothingItems.map((item) => {

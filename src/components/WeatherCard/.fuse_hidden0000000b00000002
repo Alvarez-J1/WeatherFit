@@ -24,7 +24,7 @@ function WeatherCard({
     weatherType === "hot"
       ? "Perfect weather for a T-shirt and shorts."
       : weatherType === "cold"
-        ? "A warm jacket and layers are recommended today."
+        ? "Built for warm layers, coverage, and comfort."
         : "WeatherFit is checking your best outfit match.";
 
   const locationLabel =

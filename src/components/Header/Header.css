@@ -90,10 +90,9 @@
 
 .header__date-and-location {
   margin: 0;
-  padding: 10px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-surface-muted);
+  padding: 10px 0;
+  border: none;
+  background: transparent;
   color: var(--color-text-soft);
   font-weight: 700;
   font-size: 16px;

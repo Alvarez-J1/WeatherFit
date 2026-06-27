@@ -62,10 +62,9 @@
 .weather-card__eyebrow {
   width: fit-content;
   margin: 0;
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
+  padding: 8px 0;
+  border: none;
+  background: transparent;
   color: rgba(255, 255, 255, 0.88);
   font-size: 14px;
   font-weight: 700;
@@ -129,6 +128,57 @@
   font-weight: 500;
   line-height: 26px;
   overflow-wrap: break-word;
+}
+
+.weather-card__location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 20px;
+}
+
+.weather-card__location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.weather-card__location-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.weather-card__location-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.weather-card__location-note {
+  margin: 0;
+  color: var(--hero-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.weather-card__location-note_error {
+  color: #ffe2e2;
 }
 
 .weather-card__visual {
