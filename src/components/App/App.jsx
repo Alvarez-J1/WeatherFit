@@ -16,7 +16,12 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 // Utils
-import { defaultClothingItems } from "../../utils/constants";
+import {
+  DEMO_SESSION_STORAGE_KEY,
+  defaultClothingItems,
+  demoClothingItems,
+  demoUser,
+} from "../../utils/constants";
 import { deleteItem } from "../../utils/api";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/api";
@@ -71,6 +76,12 @@ const toggleItemLike = (item, userId) => {
   };
 };
 
+const cloneClothingItems = (items) =>
+  items.map((item) => ({
+    ...item,
+    likes: Array.isArray(item.likes) ? [...item.likes] : [],
+  }));
+
 function App() {
   const {
     weatherData,
@@ -86,6 +97,9 @@ function App() {
   const [theme, setTheme] = useState(getPreferredTheme);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(
+    localStorage.getItem(DEMO_SESSION_STORAGE_KEY) === "true",
+  );
   const [currentUser, setCurrentUser] = useState({
     email: "",
     name: "",
@@ -94,7 +108,13 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("jwt") || "");
   const navigate = useNavigate();
 
+  const clearDemoSession = () => {
+    localStorage.removeItem(DEMO_SESSION_STORAGE_KEY);
+    setIsDemoMode(false);
+  };
+
   const handleRegistration = ({ email, password, name, avatar }) => {
+    clearDemoSession();
     return auth
       .signUp({ email, password, name, avatar })
       .then(() => {
@@ -123,6 +143,7 @@ function App() {
   };
 
   const handleLogin = ({ email, password }) => {
+    clearDemoSession();
     return auth
       .logIn({ email, password })
       .then((data) => {
@@ -162,6 +183,16 @@ function App() {
   };
 
   const handleEditProfile = ({ name, avatar }) => {
+    if (isDemoMode) {
+      setCurrentUser((user) => ({
+        ...user,
+        name: name.trim(),
+        avatar: avatar.trim(),
+      }));
+      closeActiveModal();
+      return;
+    }
+
     auth
       .editProfile({ name, avatar }, token)
       .then((updatedUser) => {
@@ -174,15 +205,14 @@ function App() {
   };
 
   const handleCardLike = (item) => {
-    const token = localStorage.getItem("jwt");
     const userId = currentUser?._id;
     const id = item._id;
 
-    if (!token || !userId) return;
+    if (!userId) return;
 
     const isLiked = isItemLikedByUser(item, userId);
 
-    if (!isApiItemId(id)) {
+    if (isDemoMode || !isApiItemId(id)) {
       setClothingItems((cards) =>
         cards.map((card) =>
           normalizeId(card._id) === normalizeId(id)
@@ -193,9 +223,13 @@ function App() {
       return;
     }
 
+    const jwt = token || localStorage.getItem("jwt");
+
+    if (!jwt) return;
+
     const action = isLiked
-      ? api.removeCardLike(id, token)
-      : api.addCardLike(id, token);
+      ? api.removeCardLike(id, jwt)
+      : api.addCardLike(id, jwt);
 
     action
       .then((updatedCard) => {
@@ -210,9 +244,13 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem(DEMO_SESSION_STORAGE_KEY);
     setToken("");
+    setIsDemoMode(false);
     setIsLoggedIn(false);
     setCurrentUser({ email: "", name: "", avatar: "" });
+    setClothingItems(defaultClothingItems);
+    navigate("/");
   };
 
   const handleToggleSwitchChange = () => {
@@ -250,11 +288,39 @@ function App() {
     setActiveModal("edit-profile");
   };
 
+  const handleDemoLogin = () => {
+    localStorage.removeItem("jwt");
+    localStorage.setItem(DEMO_SESSION_STORAGE_KEY, "true");
+    setToken("");
+    setIsDemoMode(true);
+    setIsAuthChecking(false);
+    setCurrentUser(demoUser);
+    setClothingItems(cloneClothingItems(demoClothingItems));
+    setIsLoggedIn(true);
+    closeActiveModal();
+    navigate("/profile");
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    if (isDemoMode) {
+      const newItem = {
+        _id: `demo-${Date.now()}`,
+        name,
+        imageUrl,
+        weather,
+        owner: demoUser._id,
+        likes: [],
+      };
+
+      setClothingItems((items) => [newItem, ...items]);
+      closeActiveModal();
+      return;
+    }
+
     api
       .addItem({ name, imageUrl, weather, token })
       .then((newItem) => {
@@ -265,6 +331,12 @@ function App() {
   };
 
   const handleDeleteItemModalSubmit = (cardId) => {
+    if (isDemoMode || !isApiItemId(cardId)) {
+      setClothingItems((items) => items.filter((item) => item._id !== cardId));
+      closeActiveModal();
+      return;
+    }
+
     deleteItem(cardId, token)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== cardId));
@@ -329,9 +401,23 @@ function App() {
   useEffect(() => {
     setIsAuthChecking(true);
     const jwt = localStorage.getItem("jwt");
+    const hasDemoSession =
+      localStorage.getItem(DEMO_SESSION_STORAGE_KEY) === "true";
+
+    if (hasDemoSession) {
+      localStorage.removeItem("jwt");
+      setToken("");
+      setCurrentUser(demoUser);
+      setClothingItems(cloneClothingItems(demoClothingItems));
+      setIsLoggedIn(true);
+      setIsDemoMode(true);
+      setIsAuthChecking(false);
+      return;
+    }
 
     if (!jwt) {
       setIsLoggedIn(false);
+      setIsDemoMode(false);
       setIsAuthChecking(false);
       return;
     }
@@ -400,7 +486,6 @@ function App() {
                     <Profile
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
-                      handleAddClick={handleAddClick}
                       onEditProfileClick={openEditProfileModal}
                       onCardLike={handleCardLike}
                       onLogout={handleLogout}
@@ -435,6 +520,7 @@ function App() {
             onClose={closeActiveModal}
             onLogin={handleLogin}
             onOpenRegister={openRegisterModal}
+            onViewDemo={handleDemoLogin}
           />
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}

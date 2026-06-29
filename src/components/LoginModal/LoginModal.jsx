@@ -8,6 +8,7 @@ export default function LoginModal({
   isOpen,
   onLogin,
   onOpenRegister,
+  onViewDemo,
 }) {
   const { values, handleChange, setValues } = useForm({
     email: "",
@@ -61,16 +62,30 @@ export default function LoginModal({
       submitClassName="modal__submit--auth modal__submit--si"
       disabled={!values.email || !values.password}
       formFooter={
-        <p className="auth-modal__switch-text">
-          New to WeatherFit?
-          <button
-            type="button"
-            className="auth-modal__switch"
-            onClick={onOpenRegister}
-          >
-            Create an account
-          </button>
-        </p>
+        <>
+          <div className="auth-modal__demo">
+            <button
+              type="button"
+              className="auth-modal__demo-button"
+              onClick={onViewDemo}
+            >
+              View Demo
+            </button>
+            <p className="auth-modal__demo-text">
+              Skip sign in and explore WeatherFit with a demo account.
+            </p>
+          </div>
+          <p className="auth-modal__switch-text">
+            New to WeatherFit?
+            <button
+              type="button"
+              className="auth-modal__switch"
+              onClick={onOpenRegister}
+            >
+              Create an account
+            </button>
+          </p>
+        </>
       }
     >
       <label htmlFor="loginModal__email" className="modal__label">

@@ -12,6 +12,55 @@
   color: var(--color-text-muted);
 }
 
+.auth-modal__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.auth-modal__demo-button {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 34%, var(--color-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface-muted));
+  color: var(--color-accent);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 20px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.auth-modal__demo-button:hover {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface-muted));
+  color: var(--color-accent-strong);
+  transform: translateY(-1px);
+}
+
+.auth-modal__demo-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.auth-modal__demo-text {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
 .modal__error {
   display: block;
   margin-top: 10px;
@@ -69,6 +118,11 @@
 }
 
 @media screen and (max-width: 560px) {
+  .auth-modal__demo {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+
   .auth-modal__switch-text {
     gap: 5px;
     font-size: 13px;

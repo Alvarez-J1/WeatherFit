@@ -27,7 +27,6 @@ function WardrobePreviewIcon() {
 function ClothesSection({
   onCardClick,
   clothingItems,
-  handleAddClick,
   onCardLike,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -39,13 +38,6 @@ function ClothesSection({
     <div className="clothes-section">
       <div className="clothes-section__header">
         <p className="clothes-section__title">Your items</p>
-        <button
-          onClick={handleAddClick}
-          type="button"
-          className="clothes-section__add-btn"
-        >
-          + Add new
-        </button>
       </div>
       {hasUserItems ? (
         <ul className="clothes-section__items">
@@ -86,13 +78,6 @@ function ClothesSection({
               Add clothing items to personalize your daily outfit
               recommendations and weather-based suggestions.
             </p>
-            {/* <button
-              onClick={handleAddClick}
-              type="button"
-              className="clothes-section__empty-add-btn"
-            >
-              + Add new
-            </button> */}
           </div>
 
           <ul className="clothes-section__empty-previews" aria-hidden="true">

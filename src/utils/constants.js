@@ -86,6 +86,22 @@ export const defaultClothingItems = [
   },
 ];
 
+export const demoUser = {
+  _id: "weatherfit-demo-user",
+  email: "demo@weatherfit.app",
+  name: "Demo User",
+  avatar: "",
+};
+
+export const demoClothingItems = defaultClothingItems.map((item, index) => ({
+  ...item,
+  _id: `demo-${item._id}`,
+  owner: demoUser._id,
+  likes: index % 4 === 0 ? [demoUser._id] : [],
+}));
+
+export const DEMO_SESSION_STORAGE_KEY = "weatherfit-demo-session";
+
 export const coordinates = {
   latitude: 40.779442,
   longitude: -74.023567,

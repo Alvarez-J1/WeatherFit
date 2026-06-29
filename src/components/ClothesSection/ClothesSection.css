@@ -5,7 +5,7 @@
 .clothes-section__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
   margin-bottom: 16px;
   font-weight: 700;
@@ -19,23 +19,6 @@
   line-height: 30px;
 }
 
-.clothes-section__add-btn {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 999px;
-  background: var(--button-primary-bg);
-  color: var(--button-primary-text);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-}
-
-.clothes-section__add-btn:hover,
 .clothes-section__empty-add-btn:hover {
   transform: translateY(-1px);
 }
@@ -253,15 +236,6 @@
 }
 
 @media screen and (max-width: 560px) {
-  .clothes-section__header {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .clothes-section__add-btn {
-    width: 100%;
-  }
-
   .clothes-section__items {
     grid-template-columns: 1fr;
     gap: 16px;
